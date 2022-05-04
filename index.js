@@ -3,9 +3,12 @@ const router = express.Router();
 const path = require("path");
 const app = express();
 const TestModel = require("./models/test");
+const userRoute = require("./routes/user");
+const healthRoute = require("./routes/health");
 
 const PORT = 3000;
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 const mongoose = require("mongoose");
 
 const dbUrl =
@@ -21,20 +24,24 @@ mongoose
     console.log("err:", e);
   });
 
+app.use("/user", userRoute);
+app.use("/health", healthRoute);
+// app.use("/health", healthRoute);
+
+// app.get("/insert", (req, res) => {
+//   var testModel = new TestModel();
+//   testModel.name = "sreeName";
+//   testModel.type = "SreeType";
+
+//   testModel.save((err, data) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.status(200).send({ msg: "Inserted to DB" });
+//     }
+//   });
+// });
+
 app.listen(PORT, () => {
   console.log(` Listen at PORT : ${PORT}`);
-});
-
-app.get("/insert", (req, res) => {
-  var testModel = new TestModel();
-  testModel.name = "sreeName";
-  testModel.type = "SreeType";
-
-  testModel.save((err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.status(200).send({ msg: "Inserted to DB" });
-    }
-  });
 });
