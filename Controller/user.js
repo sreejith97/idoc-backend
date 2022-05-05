@@ -17,16 +17,27 @@ exports.addUser = async (req, res) => {
   }
 };
 
-exports.userLogin = (req, res) => {
+exports.userLogin = async (req, res) => {
   try {
     const details = req.body;
-    console.log(details);
-    const user = db
-      .get()
-      .collection(myFirstDatabase.users)
-      .findOne({ user_mail: details.user_mail });
-    console.log(user);
-    res.status(200).json({ sucess: true });
+    //console.log(details,"detailzzz");
+    const userFromDatabase = await User.findOne({
+      user_mail: details.user_mail,
+    });
+    console.log("user from database", userFromDatabase);
+    // console.log("*****************************");
+    //console.log(user);
+    res
+      .status(200)
+      .json({
+        sucess: true,
+        data: {
+          user_name: userFromDatabase.user_name,
+          user_number: userFromDatabase.user_number,
+          user_mail: userFromDatabase.user_mail,
+          user_address: userFromDatabase.user_address,
+        },
+      });
   } catch (err) {
     res.status(500).json({ sucess: false, err });
   }
