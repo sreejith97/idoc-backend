@@ -5,6 +5,7 @@ const app = express();
 const TestModel = require("./models/test");
 const userRoute = require("./routes/user");
 const healthRoute = require("./routes/health");
+const fetch = require("node-fetch");
 
 const PORT = 3000;
 app.use(express.json());
@@ -41,6 +42,18 @@ app.use("/health", healthRoute);
 //     }
 //   });
 // });
+
+app.get("/testone", async (req, res) => {
+  try {
+    const userDetails = await fetch(
+      "https://sreejith97.github.io/sample-api/dataset.json"
+    );
+    let response = await userDetails.json();
+    res.status(200).json({ sucess: true, details: response });
+  } catch (err) {
+    res.status(500).json({ sucess: false, err });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(` Listen at PORT : ${PORT}`);

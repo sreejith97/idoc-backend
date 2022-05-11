@@ -1,4 +1,5 @@
 const User = require("../models/user");
+
 exports.addUser = async (req, res) => {
   try {
     const newUser = new User({
@@ -17,6 +18,18 @@ exports.addUser = async (req, res) => {
   }
 };
 
+// exports.usertest = async (req, res) => {
+//   try {
+//     const userDetails = await fetch(
+//       "https://sreejith97.github.io/sample-api/dataset.json"
+//     );
+//     let response = await userDetails.json();
+//     res.status(200).json({ sucess: true, details: response });
+//   } catch (err) {
+//     res.status(500).json({ sucess: false, err });
+//   }
+// };
+
 exports.userLogin = async (req, res) => {
   try {
     const details = req.body;
@@ -27,17 +40,15 @@ exports.userLogin = async (req, res) => {
     console.log("user from database", userFromDatabase);
     // console.log("*****************************");
     //console.log(user);
-    res
-      .status(200)
-      .json({
-        sucess: true,
-        data: {
-          user_name: userFromDatabase.user_name,
-          user_number: userFromDatabase.user_number,
-          user_mail: userFromDatabase.user_mail,
-          user_address: userFromDatabase.user_address,
-        },
-      });
+    res.status(200).json({
+      sucess: true,
+      data: {
+        user_name: userFromDatabase.user_name,
+        user_number: userFromDatabase.user_number,
+        user_mail: userFromDatabase.user_mail,
+        user_address: userFromDatabase.user_address,
+      },
+    });
   } catch (err) {
     res.status(500).json({ sucess: false, err });
   }
