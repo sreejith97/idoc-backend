@@ -7,7 +7,7 @@ const userRoute = require("./routes/user");
 const healthRoute = require("./routes/health");
 const fetch = require("node-fetch");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const mongoose = require("mongoose");
