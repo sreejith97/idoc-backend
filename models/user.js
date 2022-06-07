@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
-  user_id: {
-    type: String,
-    required: true,
-    trim: true,
-  },
   finger_id: {
     type: String,
     required: true,
@@ -33,6 +28,10 @@ const userSchema = new mongoose.Schema({
   user_role: {
     type: String,
     required: true,
+    trim: true,
+  },
+  user_feed: {
+    type: String,
     trim: true,
   },
 });
