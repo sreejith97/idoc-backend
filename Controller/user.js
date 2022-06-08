@@ -1,5 +1,12 @@
 const User = require("../models/user");
 
+exports.testApi = async (req, res) => {
+  try {
+    res.status(200).json({ sucess: true });
+  } catch (err) {
+    res.status(500).json({ sucess: false, err });
+  }
+};
 exports.addUser = async (req, res) => {
   try {
     const newUser = new User({
