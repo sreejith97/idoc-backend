@@ -5,6 +5,9 @@ const app = express();
 const TestModel = require("./models/test");
 const userRoute = require("./routes/user");
 const healthRoute = require("./routes/health");
+const responseRoute = require("./routes/response");
+const tokenRoute = require("./routes/token");
+
 const fetch = require("node-fetch");
 
 const PORT = process.env.PORT || 3000;
@@ -25,8 +28,10 @@ mongoose
     console.log("err:", e);
   });
 
-app.use("/user", userRoute);
+app.use("/", userRoute);
 app.use("/health", healthRoute);
+app.use("/response", responseRoute);
+app.use("/token", tokenRoute);
 // app.use("/health", healthRoute);
 
 // app.get("/insert", (req, res) => {
